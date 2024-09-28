@@ -1,4 +1,3 @@
-// eslint-disable-next-line react/prop-types
 function Empty({ resource }) {
   return <p>No {resource} could be found.</p>;
 }
