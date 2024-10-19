@@ -16,9 +16,7 @@ export async function getBookings({ filter, sortBy }) {
     throw new Error('An error occurred while fetching bookings')
 }
 
-
   return data;
-
 }
 
 export async function getBooking(id) {
