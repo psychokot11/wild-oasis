@@ -7,9 +7,12 @@ import Table from "../../ui/Table";
 import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
 import Menus from "../../ui/Menus";
-import { HiEye, HiMiniArrowDownOnSquare, HiMiniArrowUpOnSquare } from "react-icons/hi2";
+import { HiEye, HiMiniArrowDownOnSquare, HiMiniArrowUpOnSquare, HiTrash } from "react-icons/hi2";
 import { useNavigate } from "react-router-dom";
 import { useCheckout } from "../check-in-out/useCheckout";
+import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
+import { useDeleteBooking } from "./useDeleteBooking";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -60,6 +63,7 @@ function BookingRow({
   
   const navigate = useNavigate();
   const { checkout, isCheckingOut } = useCheckout();
+  const { deleteBooking, isDeleting } = useDeleteBooking();
 
   return (
     <Table.Row>
@@ -86,6 +90,7 @@ function BookingRow({
       <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
+      <Modal>
       <Menus.Menu>
         <Menus.Toggle id={bookingId} />
         <Menus.List id={bookingId} >
@@ -100,8 +105,15 @@ function BookingRow({
           <Menus.Button icon={<HiMiniArrowUpOnSquare />} onClick={() => checkout(bookingId)} disabled={isCheckingOut}>
             Check out
           </Menus.Button>}
+          <Modal.Open opens="delete">
+            <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
+          </Modal.Open>
         </Menus.List>
+        <Modal.Window name="delete">
+          <ConfirmDelete resource='cabin' onConfirm={() => deleteBooking(bookingId) } disabled={isDeleting} />
+        </Modal.Window>
       </Menus.Menu>
+      </Modal>
     </Table.Row>
   );
 }
