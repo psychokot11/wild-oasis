@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import HeaderMenu from "./headerMenu";
+import HeaderMenu from "./HeaderMenu";
 import UserAvatar from "../features/authentication/UserAvatar";
 
 const StyledHeader = styled.header`
