@@ -6,3 +6,9 @@ Learning project where the following are used:
 - Supabase for backend/API,
 - React Query to manage remote state,
 - React Hook Form for form handling.
+
+Services / features available:
+- user authentication and authorization,
+- creating / reading / updating / deleting data base records,
+- dark mode.
+
